@@ -14,7 +14,11 @@ var TimeEL;
 
 /*let index = 0
 
-for (var i = 0; i < Hours.length; i++ ){
+
+
+Function DisplayDailyPlanner(){
+    
+    for (var i = 0; i < Hours.length; i++ ){
     
     var NewTimeblock = $("<tr>")
 
@@ -86,7 +90,11 @@ console.log(ContainerEL.children().eq(0).attr("id"))
     
     } 
 
-})*/
+})
+
+}
+
+*/
 
 function DisplayDailyPlanner(hour, storedEvent){
 
@@ -173,13 +181,17 @@ function dateToday(){
 
 ContainerEL.on("click", ".saveBtn", function (e) {
 
-    e.PreventDefault();
+    e.preventDefault();
 
-    var NewInputNumber = $(e.target).children().attr("name");
+    var NewInputNumber = $(e.target).attr("name")
 
-    var NewInput = $(e.target).children().val()
+    var NewInput = $(e.target).parent().children().eq().val()
 
     localStorage.setItem(NewInputNumber, NewInput);
+
+    
+    console.log(NewInputNumber)
+    console.log(NewInput)
 
 });
 
@@ -187,15 +199,20 @@ $(".saveBtn").on("click", "fas", function (e) {
 
     e.stopPropogation();
 
-    e.PreventDefault();
+    e.preventDefault();
 
-    var NewInputNumber = $(e.target).parent().parent().children().eq(1).val().attr("name");
+    var NewInputNumber = JSON.stringify($(e.target).parent().parent().children().eq(1).attr("name"));
 
-    var NewInput = $(e.target).children().val()
+    var NewInput = JSON.stringify($(e.target).parent().parent().children.eq(1).val());
 
+    console.log(NewInputNumber)
+    console.log(NewInput)
+    
     localStorage.setItem(NewInputNumber, NewInput);
 
 });
+
+
 
 
 setInterval(dateToday, 1000)
