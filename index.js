@@ -1,62 +1,202 @@
 var Hours = [9, 10, 11, 12, 13, 14, 15, 16, 17,]
 
-var SaveButton = $("<td>")
-
-SaveButton.addClass("saveBtn")
-
-SaveButton.addClass("btn")
-
-SaveButton.addClass("p-2")
+var TimeBlock = $("tr")
 
 var ContainerEL = $(".container")
 
 var CurrentHour = moment().format("HH")
 
-$.each(Hours, function(){
+var storedEvent = []
 
-    var NewTimeblock = $("<tr>")
+var storedEvent = JSON.parse(localStorage.getItem("event"))
+
+var TimeEL;
+
+/*let index = 0
+
+for (var i = 0; i < Hours.length; i++ ){
     
+    var NewTimeblock = $("<tr>")
+
     NewTimeblock.addClass("row")
+
+    NewTimeblock.attr("id", Hours[i])
 
     ContainerEL.append(NewTimeblock);
 
-}) 
+}
 
+console.log(CurrentHour)/*
 
+/* for(var i = 0; i <= Hours.length; i++){
 
-for(var i = 0; i < Hours.length; i++){
+    
+if(TimeBlock.attr("id") < CurrentHour) {
 
-if(Hours[i] == CurrentHour) {
+    TimeBlock.addClass("past")
 
-    ContainerEL.children().addClass("present")
-
-} 
-
-
-if (Hours[i] < CurrentHour) {
-
-    ContainerEL.children().addClass("past")
+    console.log(CurrentHour)
 
 }
 
 else{
 
-    ContainerEL.children().addClass("future")
+    TimeBlock.addClass("future")
+
+    console.log(CurrentHour)
 
 }
 
-}
+if(TimeBlock.attr("id") == CurrentHour) {
+
+    TimeBlock.addClass("present")
+
+    console.log(CurrentHour)
+
+} 
+
+console.log(ContainerEL.children().eq(0).attr("id"))
+
+
+}*/    
+
+/*$.each( TimeBlock, function(){
+
+    if(TimeBlock.attr("id") < CurrentHour) {
+
+        TimeBlock.addClass("past")
     
-var dateTodayEl = $('#currentDay')
+        console.log(CurrentHour)
+    
+    }
+    
+    else{
+    
+        TimeBlock.addClass("future")
+    
+        console.log(CurrentHour)
+    
+    }
+    
+    if(TimeBlock.attr("id") == CurrentHour) {
+    
+        TimeBlock.addClass("present")
+    
+        console.log(CurrentHour)
+    
+    } 
+
+})*/
+
+function DisplayDailyPlanner(hour, storedEvent){
+
+    var NewTimeblock = $("<tr>")
+
+    NewTimeblock.addClass("row Description")
+   
+    var meridiem = hour >= 12 ? "AM": "PM";
+
+    var Digitalto12Hour = (hour % 12) || 12; 
+
+    if (CurrentHour > hour){
+
+        NewTimeblock.addClass("past")
+    }
+
+    if(CurrentHour < hour){
+
+        NewTimeblock.addClass("future")
+    }
+
+    if(CurrentHour == hour){
+
+        NewTimeblock.addClass("present")
+    };
+
+    var TimeEL = $("<td>").addClass("hour").text(Digitalto12Hour+ meridiem)
+
+    const x = {
+
+        TimeEL : TimeEL
+    }
+
+    var InputEl = $("<td>").addClass("p-2 col-8 col-lg-10")
+    
+    var InputEventField = $("<textarea>").val(storedEvent)
+
+    InputEventField.attr("name", hour)
+
+    InputEventField.attr("value", storedEvent)
+
+    InputEventField.addClass("col-8 col-lg-10")
+
+    InputEl.append(InputEventField);
+
+    var saveBtnEL = $("<td>").addClass("p-2 SaveEL")
+
+    var SaveButton = $("<button>").addClass("col-5 col-lg-1 saveBtn")
+
+    var buttonIcon = $("<i>").addClass("fas fa-save")
+
+    SaveButton.append(buttonIcon)
+
+    saveBtnEL.append(SaveButton)
+
+    NewTimeblock.append (TimeEL, InputEl, saveBtnEL);
+
+    ContainerEL.append(NewTimeblock);
+
+}
+
+for (var i = 0; i < Hours.length; i++){
+
+    if(storedEvent = true){
+
+        DisplayDailyPlanner(Hours[i], storedEvent[i])
+    }
+
+    else{
+        DisplayDailyPlanner(Hours[i], "|")
+    }
+}
+
+
+ var dateTodayEl = $('#currentDay')
 
 function dateToday(){
 
- var today = moment().format("DD MMM YYYY");
+ var today = moment().format("MMMM Do YYYY, h:mm:ss a");
 
  dateTodayEl.text(today)
 
 }
 
-dateToday()
+ContainerEL.on("click", ".saveBtn", function (e) {
 
-console.log(dateToday)
+    e.PreventDefault();
+
+    var NewInputNumber = $(e.target).children().attr("name");
+
+    var NewInput = $(e.target).children().val()
+
+    localStorage.setItem(NewInputNumber, NewInput);
+
+});
+
+$(".saveBtn").on("click", "fas", function (e) {
+
+    e.stopPropogation();
+
+    e.PreventDefault();
+
+    var NewInputNumber = $(e.target).parent().parent().children().eq(1).val().attr("name");
+
+    var NewInput = $(e.target).children().val()
+
+    localStorage.setItem(NewInputNumber, NewInput);
+
+});
+
+
+setInterval(dateToday, 1000)
+
