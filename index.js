@@ -8,8 +8,6 @@ var CurrentHour = moment().format("HH")
 
 var storedEvent = []
 
-var storedEvent = JSON.parse(localStorage.getItem("event"))
-
 var TimeEL;
 
 var saveBtnEL;
@@ -110,33 +108,35 @@ function DisplayDailyPlanner(hour, storedEvent){
    
     var meridiem = hour >= 12 ? "AM": "PM";
 
-    var Digitalto12Hour = (hour % 12) || 12; 
+    var Digitalto12Hour = (hour % 12) || 12;
+    
+    var InputEl = $("<td>").addClass("p-2 col-8 col-lg-10")
 
     if (CurrentHour > hour){
 
-        NewTimeblock.addClass("past")
+        InputEl.addClass("past")
     }
 
     if(CurrentHour < hour){
 
-        NewTimeblock.addClass("future")
+        InputEl.addClass("future")
     }
 
     if(CurrentHour == hour){
 
-        NewTimeblock.addClass("present")
+        InputEl.addClass("present")
     };
 
-    var TimeEL = $("<td>").addClass("hour").text(Digitalto12Hour+ meridiem)
+    var TimeEL = $("<td>").addClass("hour p-4 m-2").text(Digitalto12Hour+ meridiem)
 
     const x = {
 
         TimeEL : TimeEL
     }
-
-    var InputEl = $("<td>").addClass("p-2 col-8 col-lg-10")
     
-    var InputEventField = $("<textarea>").val(storedEvent)
+    var InputEventField = $("<textarea>").text(localStorage.getItem("9"))
+
+    console.log(localStorage.getItem(9))
 
     InputEventField.attr("name", hour)
 
@@ -146,9 +146,9 @@ function DisplayDailyPlanner(hour, storedEvent){
 
     InputEl.append(InputEventField);
 
-    var saveBtnEL = $("<td>").addClass("p-2 SaveEL")
+    var saveBtnEL = $("<td>").addClass("p-1 SaveEL")
 
-    var SaveButton = $("<button>").addClass("col-5 col-lg-1 Btn saveBtn")
+    var SaveButton = $("<button>").addClass("col-10 col-lg-1 Btn saveBtn")
 
     var buttonIcon = $("<i>").addClass("fas fa-save")
 
@@ -170,7 +170,7 @@ for (var i = 0; i < Hours.length; i++){
     }
 
     else{
-        DisplayDailyPlanner(Hours[i], "|")
+        DisplayDailyPlanner(Hours[i], "")
     }
 }
 
@@ -185,7 +185,7 @@ function dateToday(){
 
 }
 
- $(".saveBtn").on("click", function (e) {
+ /*$(".saveBtn").on("click", function (e) {
 
     e.preventDefault();
 
@@ -195,13 +195,10 @@ function dateToday(){
 
     localStorage.setItem(JSON.stringify(NewInputNumber), JSON.stringify(NewInput));
 
-    
-    console.log(NewInputNumber)
-    console.log(NewInput)
 
-}); 
+}); */
 
-$(".SaveEl").on("click", function (e) {
+$(".SaveEL").on("click", function (e) {
 
     e.preventDefault();
 
@@ -212,7 +209,7 @@ $(".SaveEl").on("click", function (e) {
     console.log(NewInputNumber)
     console.log(NewInput)
     
-    localStorage.setItem(JSON.stringify(NewInputNumber), JSON.stringify(NewInput));
+    localStorage.setItem(NewInputNumber, JSON.stringify(NewInput));
 
 });
 
