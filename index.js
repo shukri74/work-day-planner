@@ -134,7 +134,7 @@ function DisplayDailyPlanner(hour, storedEvent){
         TimeEL : TimeEL
     }
     
-    var InputEventField = $("<textarea>").text(localStorage.getItem("9"))
+    var InputEventField = $("<textarea>").text(JSON.parse(localStorage.getItem(hour)))
 
     console.log(localStorage.getItem(9))
 
