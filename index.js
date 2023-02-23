@@ -12,6 +12,12 @@ var storedEvent = JSON.parse(localStorage.getItem("event"))
 
 var TimeEL;
 
+var saveBtnEL;
+
+var InputEl;
+
+var InputEventField;
+
 /*let index = 0
 
 
@@ -142,7 +148,7 @@ function DisplayDailyPlanner(hour, storedEvent){
 
     var saveBtnEL = $("<td>").addClass("p-2 SaveEL")
 
-    var SaveButton = $("<button>").addClass("col-5 col-lg-1 saveBtn")
+    var SaveButton = $("<button>").addClass("col-5 col-lg-1 Btn saveBtn")
 
     var buttonIcon = $("<i>").addClass("fas fa-save")
 
@@ -179,36 +185,34 @@ function dateToday(){
 
 }
 
-ContainerEL.on("click", ".saveBtn", function (e) {
+ $(".saveBtn").on("click", function (e) {
 
     e.preventDefault();
 
-    var NewInputNumber = $(e.target).attr("name")
+    var NewInputNumber = $(this).siblings('.p-2').children().attr("name");
 
-    var NewInput = $(e.target).parent().children().eq().val()
+    var NewInput = $(this).siblings('.p-2').children().val();
 
-    localStorage.setItem(NewInputNumber, NewInput);
+    localStorage.setItem(JSON.stringify(NewInputNumber), JSON.stringify(NewInput));
 
     
     console.log(NewInputNumber)
     console.log(NewInput)
 
-});
+}); 
 
-$(".saveBtn").on("click", "fas", function (e) {
-
-    e.stopPropogation();
+$(".SaveEl").on("click", function (e) {
 
     e.preventDefault();
 
-    var NewInputNumber = JSON.stringify($(e.target).parent().parent().children().eq(1).attr("name"));
+    var NewInputNumber = $(this).siblings('.p-2').children().attr("name");
 
-    var NewInput = JSON.stringify($(e.target).parent().parent().children.eq(1).val());
+    var NewInput = $(this).siblings('.p-2').children().val();
 
     console.log(NewInputNumber)
     console.log(NewInput)
     
-    localStorage.setItem(NewInputNumber, NewInput);
+    localStorage.setItem(JSON.stringify(NewInputNumber), JSON.stringify(NewInput));
 
 });
 
