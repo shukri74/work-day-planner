@@ -104,7 +104,7 @@ function DisplayDailyPlanner(hour, storedEvent){
 
     var NewTimeblock = $("<tr>")
 
-    NewTimeblock.addClass("row Description")
+    NewTimeblock.addClass("Description")
    
     var meridiem = hour >= 12 ? "AM": "PM";
 
@@ -127,7 +127,7 @@ function DisplayDailyPlanner(hour, storedEvent){
         InputEl.addClass("present")
     };
 
-    var TimeEL = $("<td>").addClass("hour p-4 m-2").text(Digitalto12Hour+ meridiem)
+    var TimeEL = $("<td>").addClass("p-4").text(Digitalto12Hour+ meridiem)
 
     const x = {
 
@@ -142,13 +142,13 @@ function DisplayDailyPlanner(hour, storedEvent){
 
     InputEventField.attr("value", storedEvent)
 
-    InputEventField.addClass("col-8 col-lg-10")
+    InputEventField.addClass("col-lg-11")
 
     InputEl.append(InputEventField);
 
-    var saveBtnEL = $("<td>").addClass("p-1 SaveEL")
+    var saveBtnEL = $("<td>").addClass(" p-2 col-lg-10 SaveEL")
 
-    var SaveButton = $("<button>").addClass("col-10 col-lg-1 Btn saveBtn")
+    var SaveButton = $("<button>").addClass("p-4 Btn saveBtn")
 
     var buttonIcon = $("<i>").addClass("fas fa-save")
 
