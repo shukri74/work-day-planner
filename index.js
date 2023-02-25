@@ -104,7 +104,7 @@ function DisplayDailyPlanner(hour, storedEvent){
 
     var NewTimeblock = $("<tr>")
 
-    NewTimeblock.addClass("Description")
+    NewTimeblock.addClass("Description border p-2")
    
     var meridiem = hour >= 12 ? "AM": "PM";
 
@@ -127,7 +127,7 @@ function DisplayDailyPlanner(hour, storedEvent){
         InputEl.addClass("present")
     };
 
-    var TimeEL = $("<td>").addClass("p-4").text(Digitalto12Hour+ meridiem)
+    var TimeEL = $("<td>").addClass("p-4 hour").text(Digitalto12Hour+ meridiem)
 
     const x = {
 
