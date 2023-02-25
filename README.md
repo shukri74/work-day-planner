@@ -4,7 +4,7 @@
 
 This a workday scheduler which was made using jQuery and Bootstrap. It stores events which are inputed by the user and displays the current date and time and uses a color coded system to differentiate between Past, present and future events
 
-![screenshot]("Capture.PNG")
+![screenshot](Capture.PNG)
 
 https://github.com/shukri74/work-day-planner
 
