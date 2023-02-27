@@ -6,7 +6,7 @@ This a workday scheduler which was made using jQuery and Bootstrap. It stores ev
 
 ![screenshot](Capture.PNG)
 
-https://github.com/shukri74/work-day-planner
+https://shukri74.github.io/work-day-planner/
 
 ## Installation
 
